@@ -1,0 +1,25 @@
+<launch>
+    <arg name="bag_in" default="/home/mpl/Datasets/sofa_normal1.synced.bag"/>
+    <arg name="bag_out" default="/home/mpl/Datasets/sofa_normal1.synced.repj.bag"/>
+    <arg name="undistort_color" default="False"/>
+    <arg name="rgb_topic_in" default="/stereo/left/image_mono"/>
+    <arg name="rgb_topic_out" default="/rgb/image_rect"/>
+    <arg name="depth_topic_in" default="/kinect/depth_image"/>
+    <arg name="depth_topic_out" default="/prophesee/left/depth_rect"/>
+
+    <param name="/config/bag_in" value="$(arg bag_in)"/>
+    <param name="/config/bag_out" value="$(arg bag_out)"/>
+    <param name="/config/undistort_color" value="$(arg undistort_color)"/>
+    <param name="/config/rgb_topic_in" value="$(arg rgb_topic_in)"/>
+    <param name="/config/rgb_topic_out" value="$(arg rgb_topic_out)"/>
+    <param name="/config/depth_topic_in" value="$(arg depth_topic_in)"/>
+    <param name="/config/depth_topic_out" value="$(arg depth_topic_out)"/>
+
+    <group ns="target">
+        <rosparam file="$(find k4a_projector)/config/target.yaml" />
+    </group>    
+
+  <node name="k4a_projector" pkg="k4a_projector" type="k4a_projector" output="screen">
+  </node>
+
+</launch>

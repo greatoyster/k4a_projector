@@ -18,6 +18,10 @@ find_package(k4a REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(yaml-cpp REQUIRED)
 
+catkin_package(
+  INCLUDE_DIRS include
+)
+
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}

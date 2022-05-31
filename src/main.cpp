@@ -435,6 +435,10 @@ int main(int argc, char ** argv) {
           bag_out.write("/camera/left/depth_image_undistort", img_msg->header.stamp, undistorted_img_msg);
         else if (cam_calib_vec[idx].name() == "right_regular_camera")
           bag_out.write("/camera/right/depth_image_undistort", img_msg->header.stamp, undistorted_img_msg);
+        else if (cam_calib_vec[idx].name() == "left_event_camera")
+          bag_out.write("/prophesee/left/depth_image_undistort", img_msg->header.stamp, undistorted_img_msg);
+        else if (cam_calib_vec[idx].name() == "right_event_camera")
+          bag_out.write("/prophesee/right/depth_image_undistort", img_msg->header.stamp, undistorted_img_msg);
         else
           ROS_WARN("%s", colorful_char::warning("Unrecognize Camera Name! Please customize this camera in the code!").c_str());
       }

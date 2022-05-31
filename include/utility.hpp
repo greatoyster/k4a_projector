@@ -27,22 +27,6 @@ std::string error(std::string input_str) {
 
 namespace fs = boost::filesystem;
 
-// Check whether the directory/file path is absolute path or relative path, as well as its validness.
-bool directory_path_check(std::string & path) {
-  if (path.back() != '/')
-    path += '/';
-  if (!fs::exists(path)) {
-    if (path.front() != '/')
-      path = '/' + path;
-    path = ros::package::getPath("k4a_projector") + path;
-  }
-  if (!fs::exists(path)) {
-    std::cerr << colorful_char::error("Invalid directory path: " + path) << std::endl;
-    return false;
-  }
-  return true;
-}
-
 bool file_path_check(std::string & path) {
   if (!fs::exists(path)) {
     if (path.front() != '/')

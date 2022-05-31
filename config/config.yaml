@@ -1,12 +1,7 @@
 source_rosbag_path: "/data/sofa_normal1.synced.kinect_depth.bag"
-source_camera_topic: "/kinect/depth_image"
 target_rosbag_path: [
   "/data/sofa_normal1.synced.left_camera.bag", # <-- support multiple bags to be projected at one time
   "/data/sofa_normal1.synced.right_camera.bag"
-]
-target_camera_topic: [
-  "/camera/left/image_mono", # <-- follow the same order as above
-  "/camera/right/image_mono"
 ]
 target_camera_calibration_yaml_path: [
   "/data/left_regular_camera_intrinsic_results.yaml", # <-- follow the same order as above

@@ -2,7 +2,7 @@
 
 [VECtor Benchmark](https://star-datasets.github.io/vector/) is the first complete set of benchmark datasets captured with a multi-sensor setup containing an event-based stereo camera, a regular stereo camera, multiple depth sensors, and an inertial measurement unit. The setup is fully hardware-synchronized and underwent accurate extrinsic calibration. All sequences come with ground truth data captured by highly accurate external reference devices such as a motion capture system. Individual sequences include both small and large-scale environments, and cover the specific challenges targeted by dynamic vision sensors.
 
-The k4a projector is a function that uses carefully-calibrated extrinsics to reproject depth readings from the Kinect depth camera onto other sensor frames. It is offered as an independent repository, other than the [MPL Calibration toolbox](https://github.com/mgaoling/mpl_calibration_toolbox) and the [MPL dataset toolbox](https://github.com/mgaoling/mpl_dataset_toolbox), given its high dependency on the [Azure Kinect Sensor SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK).
+The k4a projector is a function that uses carefully-calibrated extrinsics to reproject depth readings from the Kinect depth camera onto other sensor frames. It is offered as an independent repository, other than the [MPL Calibration Toolbox](https://github.com/mgaoling/mpl_calibration_toolbox) and the [MPL Dataset Toolbox](https://github.com/mgaoling/mpl_dataset_toolbox), given its high dependency on the [Azure Kinect Sensor SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK).
 
 # Getting Started
 
@@ -14,7 +14,15 @@ sudo apt-get install libeigen3-dev libopencv-dev libyaml-cpp-dev
 ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
 ```
 
-**Azure Kinect Sensor SDK is also required.** Please refer to [this page](https://docs.microsoft.com/en-us/azure/kinect-dk/sensor-sdk-download#linux-installation-instructions) to install the necessary packages.
+Azure Kinect Sensor SDK (more details on [this page](https://docs.microsoft.com/en-us/azure/kinect-dk/sensor-sdk-download#linux-installation-instructions)) is also required:
+
+```
+curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
+sudo apt-get update
+sudo apt-get install k4a-tools
+sudo apt install libk4a1.4-dev
+```
 
 After that, enter your catkin workspace and the build can be triggered with the following command:
 

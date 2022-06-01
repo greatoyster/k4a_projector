@@ -1,32 +1,37 @@
-# k4a projector
+# k4a Projector
 
-Project azure kinect depth measurement to provided virtual frame with official driver for Ubuntu18.04 or other distribution with libk4a support
+[VECtor Benchmark](https://star-datasets.github.io/vector/) is the first complete set of benchmark datasets captured with a multi-sensor setup containing an event-based stereo camera, a regular stereo camera, multiple depth sensors, and an inertial measurement unit. The setup is fully hardware-synchronized and underwent accurate extrinsic calibration. All sequences come with ground truth data captured by highly accurate external reference devices such as a motion capture system. Individual sequences include both small and large-scale environments, and cover the specific challenges targeted by dynamic vision sensors.
+
+The k4a projector is a function that uses carefully-calibrated extrinsics to reproject depth readings from the Kinect depth camera onto other sensor frames. It is offered as an independent repository, other than the [MPL Calibration toolbox](https://github.com/mgaoling/mpl_calibration_toolbox) and the [MPL dataset toolbox](https://github.com/mgaoling/mpl_dataset_toolbox), given its high dependency on the [Azure Kinect Sensor SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK).
+
+# Getting Started
+
+The following instructions are tested on [Ubuntu 18.04](https://ubuntu.com/download/desktop) with [ROS Melodic](http://wiki.ros.org/ROS/Installation). A ROS **desktop-full installation** is required. On top of that, the following libraries ([Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page), [OpenCV](https://opencv.org/releases/), [yaml-cpp](https://github.com/jbeder/yaml-cpp)) have to be installed:
+
+```
+sudo apt-get update
+sudo apt-get install libeigen3-dev libopencv-dev libyaml-cpp-dev
+ln -s /usr/include/eigen3/Eigen /usr/include/Eigen
+```
+
+**Azure Kinect Sensor SDK is also required.** Please refer to [this page](https://docs.microsoft.com/en-us/azure/kinect-dk/sensor-sdk-download#linux-installation-instructions) to install the necessary packages.
+
+After that, enter your catkin workspace and the build can be triggered with the following command:
+
+```
+cd ~/catkin_ws/src
+git clone https://github.com/greatoyster/k4a_projector.git
+cd ..
+catkin_make
+source ~/catkin_ws/devel/setup.bash
+```
 
 # Usage
 
-The input is a rosbag contains depth images of uint16 format and virtual camera calibration data.
+This function is tailored for the [VECtor Benchmark](https://star-datasets.github.io/vector/), hence some of the information is hard-coded in the script. User should first check and modify the parameters in the `config/config.yaml`, then place the data sequence(s) and the related calibration result(s) into the `data` folder. Note that we have already offered four calibration results as examples which cover all the possible sensor frames to be projected. Launch the projector by:
 
-You just need to edit `./config/config.yaml` and `./config/target.yaml`
-
-# How to install libk4a
-
-Please refer to [azure kinect driver](https://docs.microsoft.com/zh-cn/azure/Kinect-dk/sensor-sdk-download) 
-
-We use `libk4a1.4-dev` in this project.
-
-```bash
-curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-
-sudo apt-add-repository https://packages.microsoft.com/ubuntu/18.04/prod
-
-sudo apt-get update
+```
+roslaunch k4a_projector run.launch
 ```
 
-# How to run example
-
-We use `catkin_simple` as dependency, just put it in your catkin workspace `src` directory
-
-Compile with `catkin_make`.
-
-After editing configuration files, run with `roslaunch k4a_projector run.launch`
-
+**Note:** Unlike image data, event data (if included in the input) will **NOT** be undistorted given its sparse nature. However, every reprojected depth image, including the ones on event frames, will **BE** undistorted (which is enforced by the Azure Kinect Sensor SDK). User should be aware of this and perform the undistortion if necessary.

@@ -420,6 +420,14 @@ int main(int argc, char ** argv) {
       bag_out.write("/camera/right/image_mono_undistort", img_msg->header.stamp, undistorted_img_msg);
     }
 
+    else if (bags_msg_ptr[earliest_idx]->getTopic() == "/prophesee/left/events") {
+      // Event data will not be undistorted given its sparse nature.
+    }
+
+    else if (bags_msg_ptr[earliest_idx]->getTopic() == "/prophesee/right/events") {
+      // Event data will not be undistorted given its sparse nature.
+    }
+
     // Reproject the depth readings onto target frames.
     else if (bags_msg_ptr[earliest_idx]->getTopic() == "/kinect/depth_image") {
       for (size_t idx = 0; idx < cam_num; ++idx) {

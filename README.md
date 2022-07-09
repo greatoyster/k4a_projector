@@ -4,6 +4,23 @@
 
 The k4a projector is a function that uses carefully-calibrated extrinsics to reproject depth readings from the Kinect depth camera onto other sensor frames. It is offered as an independent repository, other than the [MPL Calibration Toolbox](https://github.com/mgaoling/mpl_calibration_toolbox) and the [MPL Dataset Toolbox](https://github.com/mgaoling/mpl_dataset_toolbox), given its high dependency on the [Azure Kinect Sensor SDK](https://github.com/microsoft/Azure-Kinect-Sensor-SDK).
 
+# License and Citation
+
+This toolbox, together with the [MPL Calibration Toolbox](https://github.com/mgaoling/mpl_calibration_toolbox) and the [MPL Dataset Toolbox](https://github.com/mgaoling/mpl_dataset_toolbox), is available as open-source under the terms of the [BSD-3-Clause-Clear License](https://github.com/greatoyster/k4a_projector/blob/main/LICENSE.txt). If you use this toolbox in an academic context, please cite the [publication](https://star-datasets.github.io/vector/assets/pdf/VECtor.pdf) as follows:
+
+```bibtex
+@Article{gao2022vector,
+  author  = {Gao, Ling and Liang, Yuxuan and Yang, Jiaqi and Wu, Shaoxun and Wang, Chenyu and Chen, Jiaben and Kneip, Laurent},
+  title   = {{VECtor}: A Versatile Event-Centric Benchmark for Multi-Sensor SLAM},
+  journal = {IEEE Robotics and Automation Letters},
+  pages   = {8217--8224},
+  volume  = {7},
+  number  = {3},
+  year    = {2022},
+  doi     = {10.1109/LRA.2022.3186770}
+}
+```
+
 # Getting Started
 
 The following instructions are tested on [Ubuntu 18.04](https://ubuntu.com/download/desktop) with [ROS Melodic](http://wiki.ros.org/ROS/Installation). A ROS **desktop-full installation** is required. On top of that, the following libraries ([Eigen 3](https://eigen.tuxfamily.org/index.php?title=Main_Page), [OpenCV](https://opencv.org/releases/), [yaml-cpp](https://github.com/jbeder/yaml-cpp)) have to be installed:
